@@ -1,0 +1,29 @@
+Problem Statement:
+A company has a production facility that produces different types of products. The production process involves several steps, and each step has different time and resource requirements. The company wants to optimize the production process by minimizing the total production time and cost.
+
+Mathematical Optimization Problem Statement:
+Let P be the set of products to be produced, and S be the set of production steps. Let T(p,s) be the time required to complete step s for product p, and C(p,s) be the cost of resources required to complete step s for product p. Let X(p,s) be a binary variable that indicates whether step s is performed for product p. Let Y(p) be the completion time of product p.
+
+The objective is to minimize the total production time and cost, which can be expressed as follows:
+
+minimize sum(p in P, s in S) (X(p,s) * T(p,s) * C(p,s))
+
+subject to:
+
+Each product must complete all required steps:
+forall(p in P)
+sum(s in S) (X(p,s)) == 1
+
+Production steps cannot be performed simultaneously for a single product:
+forall(p in P, s1 in S, s2 in S: s1 < s2)
+X(p,s1) + X(p,s2) <= 1
+
+Production capacity constraints:
+forall(s in S)
+sum(p in P) (X(p,s) * C(p,s)) <= available_capacity(s)
+
+Completion time constraints:
+forall(p in P, s in S)
+Y(p) >= Y(p) + T(p,s) * X(p,s)
+
+The above constraints ensure that each product completes all required steps, steps cannot be performed simultaneously for a single product, production capacity constraints are satisfied, and completion time constraints are met.
